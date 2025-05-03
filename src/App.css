@@ -1,0 +1,12 @@
+:root{
+  background:linear-gradient(90deg,#a6a6a6,#ffffff);
+  
+}
+[dark-theme="dark"]{
+  background:linear-gradient(90deg,#000000,#737373);
+  color:black;
+
+}
+.margin{
+  margin: 40px auto;
+}
