@@ -11,6 +11,7 @@ import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import { useState, useEffect } from "react";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import TimerOutlinedIcon from "@mui/icons-material/TimerOutlined";
+import CalculateIcon from '@mui/icons-material/Calculate';
 // import { BrowserRouter,RouterProvider,Routes,Route } from "react-router-dom";
 // import SetTime from "./Components/SetTime";
 
@@ -139,6 +140,7 @@ const [logo, setLogo] = useState(true);
           knowdata={"All fine"}
           logo={TimerOutlinedIcon}
         />
+        <Blocks header={"Age Calculator"} direct="age" knowdata="Get accurate age including months and days" know="ok" logo={CalculateIcon}/>
       </Box>
       </div>
   )

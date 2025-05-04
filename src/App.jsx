@@ -15,6 +15,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter,  Routes, Route } from "react-router-dom";
 import SetTime from "./Components/SetTime";
 import Home from "./Components/Home";
+import AgeC from "./Components/AgeC";
 
 function App() {
   // const [light, setLight] = useState(true);
@@ -149,6 +150,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home light={light} setLight={setLight} />} />
         <Route path="/timer" element={<SetTime />} />
+        <Route path="/age" element={<AgeC/>}/>
       </Routes>
     </BrowserRouter>
   );

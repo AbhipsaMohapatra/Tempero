@@ -1,11 +1,17 @@
 import React from 'react'
 import { useEffect,useState } from 'react'
 import dayjs from 'dayjs';
+// import audiofile from '../Videos/'
+
 
 const StartTime = ({times}) => {
     const [currentTime, setCurrentTime] = useState(dayjs()); // Current time
     const [elapsedTime, setElapsedTime] = useState('00:00:00');
     const [over,setOver] = useState(false);
+    const [audioplayed,setAudioPlayed] = useState(false);
+    if(over==true){
+      const audio = new Audio('./')
+    }
   
     useEffect(() => {
         if (!times) return;
@@ -44,6 +50,22 @@ const StartTime = ({times}) => {
     
         return () => clearInterval(intervalId);
       }, [times]);
+
+      useEffect(() => {
+        if (over && !audioPlayed) {
+          const audio = new Audio('');
+          audio.play();
+          setAudioPlayed(true);
+    
+          const timeoutId = setTimeout(() => {
+            audio.pause();
+            audio.currentTime = 0;
+          }, 60000); // stop after 1 minute
+    
+          return () => clearTimeout(timeoutId);
+        }
+      }, [over, audioPlayed]);
+    
     
    
   return (
