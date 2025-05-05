@@ -10,30 +10,38 @@ import { DesktopTimePicker } from "@mui/x-date-pickers/DesktopTimePicker";
 import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
 import { TimeClock } from "@mui/x-date-pickers/TimeClock";
 import Box from "@mui/material/Box";
-import { margin, padding, textAlign } from "@mui/system";
+import { bgcolor, height, margin, padding, textAlign } from "@mui/system";
 import "./Style.css";
 import { Button } from "@mui/material";
 import StartTime from "./StartTime";
+import { useNavigate } from "react-router-dom";
 
 const SetTime = () => {
   const [start, setStarted] = useState(false);
   const [time, setTime] = useState(dayjs("2023-01-01T12:00:00"));
+  const navigate = useNavigate();
   const style = {
     textAlign: "center",
-    width: "60%",
+    width: "100%",
+    minheight: "100vh",
 
     display: "flex",
     justifyContent: "center",
+
     border: "2px solid black",
     padding: "12px",
+    bgcolor: "black",
   };
   const handleChangeTime = () => {
     // setTime(newValue)
     console.log("Selected time: " + time.format("HH:mm"));
     setStarted(true);
   };
+  const handlegetBack = () => {
+    navigate("/");
+  };
   return (
-    <Box sx={style} className="margin">
+    <Box sx={style} className="bgImage">
       {!start ? (
         <>
           <LocalizationProvider dateAdapter={AdapterDayjs} variant="dark">
@@ -45,6 +53,24 @@ const SetTime = () => {
                 "StaticTimePicker",
               ]}
             >
+              <Box
+                sx={{
+                  marginTop: "12%",
+                  alignItems: "center",
+                  width: "100%",
+                  color: "black",
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  p: "12px",
+                  "&:hover": {
+                    transform: "scale(1.03)",
+                    transition: "transform 200ms ease-out",
+                  },
+                }}
+                className="btnColor"
+              >
+                Choose your time and start the timer
+              </Box>
               <DemoItem>
                 <StaticTimePicker
                   value={time}
@@ -59,15 +85,27 @@ const SetTime = () => {
                   slotProps={{
                     layout: {
                       sx: {
-                        bgcolor: "grey",
+                        bgcolor: "#ffbd59",
                         color: "white",
                         borderRadius: "10px",
+                        width: "100%",
+                        overflow: "hidden",
                       },
                     },
                     clock: {
                       sx: {
                         bgcolor: "white",
                         color: "black",
+                        overflow: "hidden",
+                        "&::-webkit-scrollbar": { display: "none" },
+                        scrollbarWidth: "none",
+                        "& .MuiClockNumber-root": {
+                          fontSize: {
+                            xs: "0.8rem",
+                            sm: "1rem",
+                            md: "1.2rem",
+                          },
+                        },
                       },
                     },
                     actionBar: { actions: [] },
@@ -77,19 +115,48 @@ const SetTime = () => {
               <Button
                 sx={{
                   alignItems: "center",
-                  width: "25px",
-                  color: "blue",
-                  "&:hover": { transform: "scale(1.03)" },
+                  width: "100%",
+                  color: "black",
+                  fontWeight: "bold",
+                  fontSize: "20px",
+
+                  "&:hover": {
+                    transform: "scale(1.1)",
+                    transition: "transform 2ms ease-out",
+                  },
                 }}
                 onClick={handleChangeTime}
+                className="btnColor"
               >
                 Start
               </Button>
+              <br />
+              <Button
+                sx={{
+                  alignItems: "center",
+                  width: "100%",
+                  color: "black",
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  marginBottom: "12px",
+
+                  "&:hover": {
+                    transform: "scale(1.1)",
+                    transition: "transform 200ms ease-out",
+                  },
+                }}
+                onClick={handlegetBack}
+                className="btnColor"
+              >
+                Go Back to home
+              </Button>
+              <br />
+              <br />
             </DemoContainer>
           </LocalizationProvider>
         </>
       ) : (
-        <StartTime times={time} />
+        <StartTime times={time} s={setStarted} />
       )}
     </Box>
   );

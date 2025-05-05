@@ -8,3 +8,29 @@
 .margin{
     margin: 10% auto;
 }
+.btnColor{
+    background:linear-gradient(90deg,#fff7ad,#ffa9f9); 
+}
+.textCol{
+    color:#ffbd59;
+}
+.bgImage{
+    background-image: url('../Images/bgImage2.jpg');
+    background-repeat: no-repeat;
+    
+}
+/* Hide scrollbar for the calendar/time picker */
+/* Apply to body or container */
+
+  .MuiTimeClock-root,
+.MuiClock-root,
+.MuiPickerStaticWrapper-root {
+  overflow: hidden !important;
+  scrollbar-width: none; /* Firefox */
+}
+
+.MuiTimeClock-root::-webkit-scrollbar,
+.MuiClock-root::-webkit-scrollbar,
+.MuiPickerStaticWrapper-root::-webkit-scrollbar {
+  display: none;
+}
