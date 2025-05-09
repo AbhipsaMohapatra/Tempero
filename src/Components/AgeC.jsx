@@ -13,14 +13,17 @@ const AgeC = () => {
     const [ value , setValue] = useState(dayjs('2000-01-01'));
     const [show,setShow]=useState(true);
     const style = {
-        textAlign: "center",
-        width: "60%",
-    
-        display: "flex",
-        justifyContent: "center",
-        border: "2px solid black",
-        padding: "12px",
-        flexDirection:'column',
+      textAlign: "center",
+      width: "60%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",   // Add this
+      flexDirection: "column",
+      gap: "16px",            // Add spacing between elements
+      border: "2px solid",
+      borderColor: "var(--border_color)",
+      padding: "12px",
+      color: "var(--color)",
       };
       const handleClick = ()=>{
         
@@ -32,8 +35,8 @@ const AgeC = () => {
   return (
     <>
     <Box sx={style} className='margin'>
-        <Typography>Choose your birth day</Typography>
-    <LocalizationProvider dateAdapter={AdapterDayjs} sx={{width:'45%'}} >
+        <Typography sx={{fontFamily:'unset',fontSize:{md:'20px',xl:'25px'}}}>Choose your birth day</Typography>
+    <LocalizationProvider dateAdapter={AdapterDayjs} sx={{ color:'var(--color)'}} >
     <DemoContainer components={['DateCalendar']}>
       <DateCalendar
       value={value}
@@ -41,13 +44,25 @@ const AgeC = () => {
         views={['year', 'month', 'day']}
         onChange={(newValue) => setValue(newValue)}
         shouldDisableDate={()=>!show}
+        sx={{
+          
+          color: 'black',         // Text color
+          background: 'var(--cardBg)',      // Background color
+          '& .MuiPickersDay-root': {
+            color: 'black',       // Day numbers
+          },
+          '& .Mui-selected': {
+            backgroundColor: 'white', // Selected day
+            color: 'black',
+          },
+        }}
         
 
       />
     </DemoContainer>
   </LocalizationProvider>
-  <Button onClick={handleClick}>Click to Calculate</Button>
-  <Button onClick={handleShow}>Clear Previous Date</Button>
+  <Button sx={{borderColor:'var(--border_color)',border:'2px solid' , color:'var(--color)', background:'var(--cardBg)'}} onClick={handleClick}>Click to Calculate</Button>
+  <Button sx={{borderColor:'var(--border_color)',border:'2px solid' , color:'var(--color)' , background:'var(--cardBg)'}} onClick={handleShow}>Clear Previous Date</Button>
   {!show?<CalculateAge valAge={value} />:''}
   </Box></>
   )

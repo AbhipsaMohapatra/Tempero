@@ -31,122 +31,19 @@ function App() {
   //     light ? "light" : "dark"
   //   );
   // }, [light]);
-  const [light, setLight] = useState(true);
+  const [light, setLight] = useState(localStorage.getItem("selectedTheme")==="light"?true:false);
 
   useEffect(() => {
+    const theme = light?"light":"dark"
     document.documentElement.setAttribute(
-      "dark-theme",
-      light ? "light" : "dark"
+      "dark-theme",theme
     );
+    localStorage.setItem("selectedTheme",theme);
   }, [light]);
 
   return (
     <BrowserRouter>
-      {/* <div>
-      <Box
-        sx={{
-          border: "2px solid black",
-          borderRadius: "25px",
-          padding: "25px",
-          width: "45%",
-          bgcolor: "bisque",
-          fontSize: { xs: 0, sm: "12px", md: "20px", lg: "20px", xl: "25px" },
-        }}
-        className="margin text-center "
-      >
-        <Typography
-          sx={{
-            fontSize: {
-              xs: "11px",
-              sm: "15px",
-              md: "20px",
-              lg: "25px",
-              xl: "30px",
-            },
-          }}
-          className="italic underline"
-        >
-          Welcome To...
-        </Typography>
-        <br />
-        <Typography
-          sx={{
-            fontSize: {
-              xs: "11px",
-              sm: "15px",
-              md: "20px",
-              lg: "27px",
-              xl: "35px",
-            },
-            fontWeight: "25px",
-          }}
-          className="italic text-3xl"
-        >
-          Tempero : Spicing up time, one tick at a time.
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          border: "3px solid black",
-          borderRadius: "35px",
-          padding: "25px",
-          width: "55%",
-          display: "flex",
-          gap: "25px",
-        }}
-        className="margin"
-      >
-        
-
-        <Card
-          sx={{
-            width: "25%",
-            height: "auto",
-            bgcolor: "grey",
-            cursor: "pointer",
-            boxShadow: "2px 2px 2px black",
-            "&:hover": {
-              transform: "scale(1.05)",
-              boxShadow: "2px 1px 1px black",
-            },
-            textAlign: "center",
-            margin: "10px",
-          }}
-          onClick={ChangeBg}
-        >
-          <CardContent>
-            {logo ? (
-              <WbSunnyOutlinedIcon fontSize="large" />
-            ) : (
-              <DarkModeOutlinedIcon />
-            )}
-
-            <Typography
-              gutterBottom
-              sx={{
-                fontSize: 20,
-                textAlign: "center",
-                fontWeight: "bold",
-                marginTop: "20%",
-              }}
-              className="black"
-            >
-              Theme
-            </Typography>
-          </CardContent>
-        </Card>
-
-        <Blocks
-          header={"Timer"}
-          direct="timer"
-          know={"ok"}
-          knowdata={"All fine"}
-          logo={TimerOutlinedIcon}
-        />
-      </Box>
-       
-       
-    </div> */}
+      
       <Routes>
         <Route path="/" element={<Home light={light} setLight={setLight} />} />
         <Route path="/timer" element={<SetTime />} />

@@ -16,7 +16,7 @@ import CalculateIcon from '@mui/icons-material/Calculate';
 // import SetTime from "./Components/SetTime";
 
 
-const Home = ({ light, setLight }) => {
+const Home = () => {
 //     const [light, setLight] = useState(true);
 
 //   const [logo, setLogo] = useState(true);
@@ -30,11 +30,21 @@ const Home = ({ light, setLight }) => {
 //       light ? "light" : "dark"
 //     );
 //   }, [light]);
-const [logo, setLogo] = useState(true);
+const [light, setLight] = useState(localStorage.getItem("selectedTheme")==="light"?true:false);
+
+useEffect(() => {
+  const theme = light?"light":"dark"
+  document.documentElement.setAttribute(
+    "dark-theme",theme
+  );
+  localStorage.setItem("selectedTheme",theme);
+}, [light]);
+
+// const [logo, setLogo] = useState(true);
 
   const ChangeBg = () => {
-    setLogo(!logo);
-    setLight((prev) => !prev);
+    // setLogo(!logo);
+    setLight(!light);
   };
 
  
@@ -42,16 +52,23 @@ const [logo, setLogo] = useState(true);
     <div>
       <Box
         sx={{
-          border: "2px solid black",
+          border: "2px solid",
           borderRadius: "25px",
-          padding: "25px",
+          display:'flex',
+          justifyContent:'center',
+          alignItems:'center',
+          padding:'5px',
           width: "45%",
-          bgcolor: "bisque",
-          fontSize: { xs: 0, sm: "12px", md: "20px", lg: "20px", xl: "25px" },
+          background: "var(--cardBg)",
+          fontSize: { xs: "10px", sm: "12px", md: "20px", lg: "20px", xl: "25px" },
+          borderColor:'var(--border_color)',
+          color:'var(--color)',
+          marginBottom:'120px',
+
         }}
-        className="margin text-center "
+        className="margin text-center"
       >
-        <Typography
+        {/* <Typography
           sx={{
             fontSize: {
               xs: "11px",
@@ -59,23 +76,25 @@ const [logo, setLogo] = useState(true);
               md: "20px",
               lg: "25px",
               xl: "30px",
-            },
+            },color:'var(--color)'
           }}
           className="italic underline"
         >
           Welcome To...
-        </Typography>
+        </Typography> */}
         <br />
         <Typography
           sx={{
             fontSize: {
-              xs: "11px",
-              sm: "15px",
+              xs: "20px",
+              sm: "20px",
               md: "20px",
               lg: "27px",
               xl: "35px",
             },
             fontWeight: "25px",
+            color:'var(--color)',
+            
           }}
           className="italic text-3xl"
         >
@@ -87,9 +106,15 @@ const [logo, setLogo] = useState(true);
           border: "3px solid black",
           borderRadius: "35px",
           padding: "25px",
-          width: "55%",
+          width: "90%", // Use relative width for responsiveness
+          maxWidth: "1200px",
           display: "flex",
+          flexWrap: "wrap", // Enable wrapping of cards
           gap: "25px",
+          borderColor: "var(--border_color)",
+          color: "var(--color)",
+          justifyContent: "center",
+          alignItems: "stretch",
         }}
         className="margin"
       >
@@ -97,25 +122,29 @@ const [logo, setLogo] = useState(true);
 
         <Card
           sx={{
-            width: "25%",
+            flex: "1 1 250px", // Flexible grow/shrink/basis
+            minWidth: "250px",
+            maxWidth: "300px",
             height: "auto",
-            bgcolor: "grey",
+            background: "var(--cardBg)",
             cursor: "pointer",
-            boxShadow: "2px 2px 2px black",
+            boxShadow: "2px 2px 6px rgba(0,0,0,0.2)",
+            transition: "transform 0.2s ease, box-shadow 0.2s ease",
             "&:hover": {
               transform: "scale(1.05)",
-              boxShadow: "2px 1px 1px black",
+              boxShadow: "4px 4px 10px rgba(0,0,0,0.3)",
             },
             textAlign: "center",
-            margin: "10px",
+            borderRadius: "16px",
           }}
           onClick={ChangeBg}
         >
           <CardContent>
-            {logo ? (
-              <WbSunnyOutlinedIcon fontSize="large" />
+            {light ? (
+              <DarkModeOutlinedIcon fontSize="large" />
             ) : (
-              <DarkModeOutlinedIcon />
+              
+              <WbSunnyOutlinedIcon fontSize="large" />
             )}
 
             <Typography
@@ -125,6 +154,7 @@ const [logo, setLogo] = useState(true);
                 textAlign: "center",
                 fontWeight: "bold",
                 marginTop: "20%",
+                color:'var(--color)'
               }}
               className="black"
             >

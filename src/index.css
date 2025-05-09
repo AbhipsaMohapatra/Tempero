@@ -1,4 +1,24 @@
 @import "tailwindcss";
+
+:root{
+  background:linear-gradient(90deg,#a6a6a6,#ffffff);
+  --color:black;
+  --modalColor:white;
+  --border_color:black;
+  --cardBg:linear-gradient(90deg,#0cc0df,#ffde59);
+  
+  
+  
+}
+[dark-theme="dark"]{
+  /* background:linear-gradient(90deg,#000000,#737373); */
+  --cardBg :linear-gradient(90deg,#8c52ff,#ff914d);
+  background: black;
+  --color:white;
+  --modalColor:black;
+  --border_color:white;
+
+}
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
